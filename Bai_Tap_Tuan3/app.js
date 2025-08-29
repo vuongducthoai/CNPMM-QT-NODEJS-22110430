@@ -202,10 +202,41 @@
 //Function Overloadings trong TypeScript
 /*
     - Dinh nghia nhieu kieu tham so va kiêu tra ve cho cung mot ham
+    - Overloading chi ton tai khi complie voi Typescript
+    - Trong Javascript runtime thi thuc chat chi co mot ham duy nhat
+    - Dung overloads giup code ro rang hon, thay vi phai luon dung any
 */
-function addNumbers(a, b) { return a + b; }
-;
-function addStrings(a, b) {
-    return a + b;
+// VD1: 
+// function addNumbers(a: number, b: number): number{return a + b};
+// function addStrings(a: string, b: string): string{
+//     return a + b;
+// }
+// console.log(addStrings("a", "b"));
+//VD2: 
+// function getItem(arr: string[], index: number): string;
+// function getItem(obj: {[key: string]: number}, key: string): number;
+// function getItem(arg1: any, arg2: any): any{
+//     return arg1[arg2];
+// }
+// console.log(getItem(["a", "b", "c"], 1)); 
+// console.log(getItem({age: 20, score: 100}, "age")); 
+//VD3: 
+// khai bao 2 dong overload signatures - Chung khong co than ham 
+// Typescript dung de kiem tra kieu khi goi ham (compile-time)
+// function format(value: number) : string; 
+// function format(value: Date): string;   
+function format(value) {
+    if (value instanceof Date) {
+        return value.toISOString();
+    }
+    else if (value instanceof Number) {
+        return value.toFixed(2);
+    }
+    return value;
 }
-console.log(addStrings("a", "b"));
+//Khi chay thi chi có đúng một function formar(value: any): ant{
+//...}
+//
+console.log(format(12.345));
+console.log(format(new Date()));
+console.log(format("abc")); //Error: Vi Typescript khong co overloading nào nhận string
