@@ -1,5 +1,8 @@
 import db from '../models/index.js'; // import database 
+import users from '../models/users.js';
 import CRUDService from '../services/CRUDService.js';
+
+
 //ham getHomePage
 let getHomePage = async(req, res) => {
     try {
@@ -20,6 +23,10 @@ let getAboutPage = (req, res) => {
     return res.render('test/about/ejs');
 }
 
+let getCreateUserForm = (req, res) => {
+    return res.render('users/post-crud-form.ejs');
+}
+
 //Ham CRUD
 let getCRUD = (req, res) => {
     return res.render('crud.ejs');
@@ -35,9 +42,16 @@ let getFindAllCrud = async (req, res) => {
 
 //ham post CRUD 
 let postCRUD = async(req, res) => { // dung async de xy lu bat dong bo 
-    let message = await CRUDService.createNewUser(req.body); // goi service
-    console.log(message);
-    return res.send('Post crud to server');
+   try {
+        await CRUDService.createNewUser(req.body);
+        let data = await CRUDService.getAllUser(); 
+        return res.render('users/findAllUser.ejs', {
+            datalist: data
+        })
+   }catch(e){
+     console.log(e);
+    return res.status(500).send('Error creating user');
+   }
 }
 
 //Ham lay du lieu de edit 
@@ -46,7 +60,7 @@ let getEditCRUD = async(req, res) => {
     if(userId){ // checkId 
         let userData = await CRUDService.getUserInfoById(userId);
 
-        return res.render('user/editUser.ejs', {
+        return res.render('users/updateUser.ejs', {
             data: userData
         });
     } else {
@@ -57,7 +71,7 @@ let getEditCRUD = async(req, res) => {
 let putCRUD = async(req, res) => {
     let data = req.body;
     let data1 = await CRUDService.updateUser(data); // update roi hien thi lai danh sach User
-    return res.render('user/findAllUser.ejs', {
+    return res.render('users/findAllUser.ejs', {
         datalist: data1
     });
 }
@@ -65,12 +79,15 @@ let putCRUD = async(req, res) => {
 let deleteCRUD = async (req, res) => {
     let id = req.query.id; // Vi tren view ?id = 1
     if(id){
-        await CRUDService.deleteuserById(id);
-        return res.send('Deleted!!!!!!!!!!');
+       let data =  await CRUDService.deleteuserById(id);
+       return res.render('users/findAllUser.ejs', {
+        datalist: data
+    });
     } else {
         return res.send('Not find user')
     }
 }
+
 
 export default {
     getHomePage: getHomePage,
@@ -80,5 +97,6 @@ export default {
     getFindAllCrud, getFindAllCrud,
     getEditCRUD, getEditCRUD,
     putCRUD, putCRUD,
-    deleteCRUD, deleteCRUD
+    deleteCRUD, deleteCRUD,
+    getCreateUserForm, getCreateUserForm
 }

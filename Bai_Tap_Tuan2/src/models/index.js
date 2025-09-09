@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import Sequelize from "sequelize";
 import process from "process";
 
@@ -40,7 +40,8 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach(async (file) => {
-    const modelModule = await import(path.join(__dirname, file));
+    const modelPath = path.join(__dirname, file);
+    const modelModule = await import(pathToFileURL(modelPath).href);
     const model = modelModule.default(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });

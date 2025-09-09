@@ -11,10 +11,11 @@ let initWebRoutes = (app) => {
         return res.send('Vương Đức Thoại');
     });
 
-    //Cach 2: Goi ham xu ly tu homeController de tach biet phan xu ly logic ra file kha
+    //Cach 2: Goi ham xu ly tu homeController de tach biet phan xu ly logic ra file khac
     router.get('/home', homeController.getHomePage); // URL /home → hàm getHomePage trong controller
     router.get('/about', homeController.getAboutPage); // URL /about → hàm getAboutPage
     router.get('/crud', homeController.getCRUD); // URL /crud → hàm getCRUD
+    router.get('/post-crud-form', homeController.getCreateUserForm); // URL -> hien thi form tao user moi
     router.post('/post-crud', homeController.postCRUD); // URL /post-crud → hàm postCRUD
     router.get('/get-crud', homeController.getFindAllCrud); // URL /get-crud → lấy toàn bộ dữ liệu
     router.get('/edit-crud', homeController.getEditCRUD); // URL /edit-crud → hàm getEditCRUD

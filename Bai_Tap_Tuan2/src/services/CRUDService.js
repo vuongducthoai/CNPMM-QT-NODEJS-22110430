@@ -51,7 +51,7 @@ let getAllUser = () => {
 
 //lay findOne CRUD 
 let getUserInfoById = (userId) => {
-    return Promise(async (resolve, reject) => { // Dung Promist dam bao luon tra ket qua, trong xu ly bat dong bo
+    return new Promise(async (resolve, reject) => { // Dung Promist dam bao luon tra ket qua, trong xu ly bat dong bo
         try {
             let user = await db.User.findOne({
                 where: {id:userId}, // query dieu kien cho tham so
@@ -103,7 +103,9 @@ let deleteuserById = (userId) => {
             if(user){
                 user.destroy();
             }
-            resolve(); // la return
+            //lay danh sach user
+            let allusers = await db.User.findAll();
+            resolve(allusers);
         }catch(e){
             reject(e);
         }
