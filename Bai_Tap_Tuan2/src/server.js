@@ -20,5 +20,5 @@ const port = process.env.PORT || 6969; // PORT lấy từ .env hoặc mặc đ�
 
 // chạy server 
 app.listen(port, () => {
-  console.log("🚀 Backend NodeJS is running on the port: " + port);
+  console.log("Backend NodeJS is running on the port: " + port);
 });
