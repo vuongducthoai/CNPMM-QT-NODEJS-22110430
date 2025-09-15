@@ -19,13 +19,18 @@ webAPI.get("/", getHomePage);
 app.use('/', webAPI);
 //khai bao route cho API
 app.use('/v1/api/', apiRoutes);
+const categoryRoutes = require('./routes/categoryRoute');
+const productRoutes = require('./routes/productRoute');
+app.use('/v1/api/categories', categoryRoutes);
+app.use('/v1/api/products', productRoutes);
+
 (async () => {
     try {
         //ket noi database using mongoose
         await connection();
         //lang nghe port trong env
         app.listen(port, () => {
-            console.log(`Backend NodeJs App listening on port ${port}`);
+            console.log(`Backend NodeJs App listening on port ${port}`)
         })
     } catch(error){
         console.log(">>> Error connect to DB: ", error)

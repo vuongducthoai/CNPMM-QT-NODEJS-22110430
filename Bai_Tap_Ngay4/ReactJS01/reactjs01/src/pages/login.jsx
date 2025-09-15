@@ -4,6 +4,7 @@ import { loginApi } from "../util/api";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/auth.context";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import './login.css'
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,8 +14,9 @@ const LoginPage = () => {
     const { email, password } = values;
 
     const res = await loginApi(email, password);
+    console.log("Login response:", res);
 
-    if (res && res.EC === 0) {
+    if (res && res.EX === 0) {
       localStorage.setItem("access_token", res.access_token);
       notification.success({
         message: "LOGIN USER",
@@ -27,8 +29,10 @@ const LoginPage = () => {
           name: res?.user?.name ?? "",
         },
       });
-      navigate("/");
+      console.log("Navigate to /products...");
+      navigate("/products");
     } else {
+    
       notification.error({
         message: "LOGIN USER",
         description: res?.EM ?? "error",
@@ -37,7 +41,8 @@ const LoginPage = () => {
   };
 
   return (
-    <Row justify="center" style={{ marginTop: "30px" }}>
+     <div className="login-page">
+    <Row justify="center" style={{ marginTop: "30px"}}>
       <Col xs={24} md={16} lg={8}>
         <fieldset
           style={{
@@ -53,10 +58,13 @@ const LoginPage = () => {
             onFinish={onFinish}
             autoComplete="off"
             layout="vertical"
+            
           >
             <Form.Item
+              
               label="Email"
               name="email"
+              className="form-label-custom"
               rules={[
                 {
                   required: true,
@@ -70,6 +78,7 @@ const LoginPage = () => {
             <Form.Item
               label="Password"
               name="password"
+              className="form-label-custom"
               rules={[
                 {
                   required: true,
@@ -81,7 +90,7 @@ const LoginPage = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" className="form-button">
                 Login
               </Button>
             </Form.Item>
@@ -97,6 +106,7 @@ const LoginPage = () => {
         </fieldset>
       </Col>
     </Row>
+    </div>
   );
 };
 

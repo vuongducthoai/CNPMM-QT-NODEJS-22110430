@@ -3,6 +3,7 @@ import { Button, Col, Divider, Form, Input, notification, Row } from 'antd';
 import { createUserApi } from '../util/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import './register.css'
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const RegisterPage = () => {
   };
 
   return (
+     <div className="register-page">
     <Row justify={"center"} style={{ marginTop: "30px" }}>
       <Col xs={24} md={16} lg={8}>
         <fieldset style={{
@@ -81,6 +83,7 @@ const RegisterPage = () => {
         </fieldset>
       </Col>
     </Row>
+    </div>
   );
 };
 

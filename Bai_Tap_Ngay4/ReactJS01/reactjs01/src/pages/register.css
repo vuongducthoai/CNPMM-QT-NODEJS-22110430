@@ -1,0 +1,5 @@
+.register-page {
+  background-color: aliceblue;
+  min-height: 100vh; /* full chiều cao */
+  padding-top: 50px;
+}

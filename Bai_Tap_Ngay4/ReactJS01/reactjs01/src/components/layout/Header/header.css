@@ -1,0 +1,87 @@
+/* Container tổng */
+.container-header {
+  width: 100%;
+  height: 65px;
+  background-color: #000;
+}
+
+/* Flex cho nội dung */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  height: 65px;
+  padding: 0 20px;
+}
+
+/* Logo */
+.logo img {
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Menu */
+.header-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.header-menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 20px 10px;
+  transition: background 0.2s;
+}
+
+.header-menu li a:hover {
+  background-color: #2d2d2d;
+  border-radius: 4px;
+}
+
+/* Khu vực bên phải (search + icon) */
+.icon-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Search form */
+.search {
+  display: flex;
+  align-items: center;
+  background: #3e3d3f;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  width: 180px;
+}
+
+.search input::placeholder {
+  color: #aaa;
+}
+
+.search .icon-search {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Icon cart */
+.icon-header a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}

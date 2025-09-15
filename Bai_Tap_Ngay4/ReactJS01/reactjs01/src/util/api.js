@@ -1,3 +1,4 @@
+import { ExceptionMap } from 'antd/es/result';
 import axios from './axios.customize';
 
 const createUserApi = (name, email, password) => {
@@ -17,8 +18,20 @@ const getUserApi = () => {
   return axios.get(URL_API);
 }
 
+const getProductApi = async (page = 1, limit = 6) => {
+const URL_API = `/v1/api/products?page=${page}&limit=${limit}`;
+  return axios.get(URL_API);
+};
+
+const searchProductApi = async(keyword) => {
+  const URL_API = `/v1/api/products/search/elastic?q=${encodeURIComponent(keyword)}`;
+  return axios.get(URL_API);
+}
+
 export {
   createUserApi,
   loginApi,
-  getUserApi
+  getUserApi,
+  getProductApi,
+  searchProductApi
 };

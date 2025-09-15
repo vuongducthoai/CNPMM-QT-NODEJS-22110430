@@ -1,0 +1,16 @@
+.login-page {
+  background-color: aliceblue;
+  min-height: 100vh; /* full chiều cao */
+  padding-top: 50px;
+}
+
+.login-page .ant-form-item-label > label {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.login-page .form-button {
+  background-color: blue;
+  color: white;
+}
